@@ -1,0 +1,13 @@
+- args:
+    cascade: false
+    read_only: false
+    sql: CREATE TABLE "public"."comments"("id" int8 NOT NULL, "comment" text NOT NULL,
+      "user_id" text NOT NULL, "post_id" int8 NOT NULL, "created_at" timestamptz NOT
+      NULL DEFAULT now(), PRIMARY KEY ("id") , FOREIGN KEY ("user_id") REFERENCES
+      "public"."users"("id") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("post_id")
+      REFERENCES "public"."posts"("id") ON UPDATE cascade ON DELETE cascade);
+  type: run_sql
+- args:
+    name: comments
+    schema: public
+  type: add_existing_table_or_view
